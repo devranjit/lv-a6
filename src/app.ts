@@ -34,6 +34,10 @@ export function createApp(env: { jwt: string; initialBalance: number; commission
     res.json({ ok: true, db: mongoose.connection.readyState })
   })
 
+  app.get("/test", (_req, res) => {
+    res.json({ message: "Test route works!" })
+  })
+
   app.use("/api/auth", authRoutes({ jwt: env.jwt, initialBalance: env.initialBalance }))
   app.use("/api/wallet", requireAuth(env.jwt), requireRole(["user","agent","admin"]), walletRoutes())
   app.use("/api/transactions", requireAuth(env.jwt), transactionRoutes())

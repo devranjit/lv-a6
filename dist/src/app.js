@@ -15,6 +15,7 @@ export function createApp(env) {
     app.use(helmet());
     app.use(morgan("dev"));
     app.use(express.json());
+    console.log('Request path:', req.path);
     app.get("/favicon.ico", (_req, res) => res.status(204).end());
     app.get("/", (_req, res) => {
         const base = `http://localhost:${process.env.PORT || 4000}`;

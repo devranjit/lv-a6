@@ -2,16 +2,16 @@ import type { VercelRequest, VercelResponse } from "@vercel/node"
 import { createApp } from "../src/app"
 import { connectDB } from "../src/config/db"
 
-export const config = { runtime: "nodejs18.x" }
-
 const mongo = process.env.MONGO_URI as string
 const jwt = process.env.JWT_SECRET as string
 const initial = parseInt(process.env.INITIAL_BALANCE || "50", 10)
 const bps = parseInt(process.env.AGENT_COMMISSION_BPS || "100", 10)
 
+let ready = false
 const app = createApp({ jwt, initialBalance: initial, commissionBps: bps })
 
-let ready = false
+export const config = { runtime: "nodejs" }
+
 async function ensure() {
   if (!ready) {
     await connectDB(mongo)
@@ -21,5 +21,5 @@ async function ensure() {
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   await ensure()
-  return (app as any)(req, res)
+  ;(app as any)(req, res)
 }
