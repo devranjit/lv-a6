@@ -7,7 +7,6 @@
     "dev": "tsx watch src/server.ts",
     "start": "node dist/server.js",
     "build": "tsc"
-    
   },
   "dependencies": {
     "bcryptjs": "2.4.3",
@@ -28,6 +27,7 @@
     "@types/jsonwebtoken": "9.0.6",
     "@types/morgan": "1.9.7",
     "@types/node": "^24.3.0",
+    "@vercel/node": "^5.3.13",
     "tsx": "4.19.1",
     "typescript": "5.5.4"
   }
