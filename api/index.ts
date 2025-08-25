@@ -1,4 +1,4 @@
-
+import type { VercelRequest, VercelResponse } from "@vercel/node"
 import { createApp } from "../src/app"
 import { connectDB } from "../src/config/db"
 
@@ -19,8 +19,7 @@ async function ensure() {
   }
 }
 
-
-export default async function handler(req: any, res: any) {
+export default async function handler(req: VercelRequest, res: VercelResponse) {
   await ensure()
   return (app as any)(req, res)
 }
